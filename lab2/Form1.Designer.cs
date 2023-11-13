@@ -30,7 +30,6 @@
         {
             btnAddWord = new Button();
             wordBox = new TextBox();
-            richTextBox1 = new RichTextBox();
             label1 = new Label();
             label2 = new Label();
             colorDialog1 = new ColorDialog();
@@ -41,7 +40,19 @@
             label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
             numericUpDown1 = new NumericUpDown();
+            label4 = new Label();
+            label5 = new Label();
+            textBoxNumber = new TextBox();
+            listBox1 = new ListBox();
+            btnItemColor = new Button();
+            label6 = new Label();
+            pictureBox1 = new PictureBox();
+            label7 = new Label();
+            openFileDialog1 = new OpenFileDialog();
+            button1 = new Button();
+            dateTimePicker2 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnAddWord
@@ -60,14 +71,6 @@
             wordBox.Name = "wordBox";
             wordBox.Size = new Size(296, 39);
             wordBox.TabIndex = 10;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(567, 65);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(614, 354);
-            richTextBox1.TabIndex = 15;
-            richTextBox1.Text = "";
             // 
             // label1
             // 
@@ -109,7 +112,7 @@
             // 
             // btnClearRich
             // 
-            btnClearRich.Location = new Point(567, 444);
+            btnClearRich.Location = new Point(567, 461);
             btnClearRich.Name = "btnClearRich";
             btnClearRich.Size = new Size(150, 46);
             btnClearRich.TabIndex = 18;
@@ -119,7 +122,7 @@
             // 
             // btnColored
             // 
-            btnColored.Location = new Point(20, 427);
+            btnColored.Location = new Point(20, 444);
             btnColored.Name = "btnColored";
             btnColored.Size = new Size(231, 63);
             btnColored.TabIndex = 19;
@@ -140,7 +143,7 @@
             // 
             dateTimePicker1.Location = new Point(29, 274);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(532, 39);
+            dateTimePicker1.Size = new Size(471, 39);
             dateTimePicker1.TabIndex = 21;
             // 
             // numericUpDown1
@@ -150,11 +153,111 @@
             numericUpDown1.Size = new Size(240, 39);
             numericUpDown1.TabIndex = 22;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(900, 147);
+            label4.Name = "label4";
+            label4.Size = new Size(65, 32);
+            label4.TabIndex = 25;
+            label4.Text = "Дата";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(900, 31);
+            label5.Name = "label5";
+            label5.Size = new Size(89, 32);
+            label5.TabIndex = 27;
+            label5.Text = "Номер";
+            // 
+            // textBoxNumber
+            // 
+            textBoxNumber.Location = new Point(900, 82);
+            textBoxNumber.Name = "textBoxNumber";
+            textBoxNumber.Size = new Size(89, 39);
+            textBoxNumber.TabIndex = 26;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 32;
+            listBox1.Location = new Point(567, 81);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(300, 356);
+            listBox1.TabIndex = 28;
+            // 
+            // btnItemColor
+            // 
+            btnItemColor.Enabled = false;
+            btnItemColor.Location = new Point(900, 322);
+            btnItemColor.Name = "btnItemColor";
+            btnItemColor.Size = new Size(65, 65);
+            btnItemColor.TabIndex = 29;
+            btnItemColor.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(900, 279);
+            label6.Name = "label6";
+            label6.Size = new Size(143, 32);
+            label6.TabIndex = 30;
+            label6.Text = "Цвет текста";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(1331, 81);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(350, 350);
+            pictureBox1.TabIndex = 31;
+            pictureBox1.TabStop = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(1331, 31);
+            label7.Name = "label7";
+            label7.Size = new Size(116, 32);
+            label7.TabIndex = 32;
+            label7.Text = "Картинка";
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1331, 452);
+            button1.Name = "button1";
+            button1.Size = new Size(228, 46);
+            button1.TabIndex = 33;
+            button1.Text = "Выбор картинки";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btnOpenFile_Click;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(900, 212);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(405, 39);
+            dateTimePicker2.TabIndex = 34;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1215, 540);
+            ClientSize = new Size(1716, 558);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(button1);
+            Controls.Add(label7);
+            Controls.Add(pictureBox1);
+            Controls.Add(label6);
+            Controls.Add(btnItemColor);
+            Controls.Add(listBox1);
+            Controls.Add(label5);
+            Controls.Add(textBoxNumber);
+            Controls.Add(label4);
             Controls.Add(numericUpDown1);
             Controls.Add(dateTimePicker1);
             Controls.Add(label3);
@@ -164,12 +267,12 @@
             Controls.Add(btnAddWithoutParam);
             Controls.Add(btnAddWord);
             Controls.Add(wordBox);
-            Controls.Add(richTextBox1);
             Controls.Add(label1);
             Controls.Add(label2);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -179,7 +282,6 @@
         private Button btnAddWord;
         private TextBox wordBox;
         private Button btnColorWord;
-        private RichTextBox richTextBox1;
         private Label label1;
         private Button btnClearSentence;
         private Label label2;
@@ -191,5 +293,16 @@
         private Label label3;
         private DateTimePicker dateTimePicker1;
         private NumericUpDown numericUpDown1;
+        private Label label4;
+        private Label label5;
+        private TextBox textBoxNumber;
+        private ListBox listBox1;
+        private Button btnItemColor;
+        private Label label6;
+        private PictureBox pictureBox1;
+        private Label label7;
+        private OpenFileDialog openFileDialog1;
+        private Button button1;
+        private DateTimePicker dateTimePicker2;
     }
 }

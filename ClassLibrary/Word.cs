@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-
 namespace ClassLibrary
 {
     public class Word
@@ -7,6 +6,12 @@ namespace ClassLibrary
         public Color Color { get; set; }
         private string _content;
         public int Number { get; set; }
+        private string foto {  get; set; }
+        public string Foto
+        {
+            get { return foto; }
+            set { foto = value; }
+        }
 
         public string Content
         {
@@ -23,7 +28,6 @@ namespace ClassLibrary
 
         public static readonly Color BackColor;
 
-
         // Конструкторы
         public Word(string content, Color color, int number)
         {
@@ -34,6 +38,11 @@ namespace ClassLibrary
         public Word(string content)
         {
             this.Content = content;
+        }
+        public Word(string content, string foto)
+        {
+            this.Content = content;
+            this.foto = foto;
         }
         public Word() : this("Word", Color.Red, 1) { }
         static Word()
