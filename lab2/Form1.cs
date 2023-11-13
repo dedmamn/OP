@@ -15,14 +15,14 @@ namespace lab2
 
         private void btnAddWithoutParam_Click(object sender, EventArgs e)
         {
-            WordV2 word = new WordV2();
+            Word word = new Word();
             richTextBox1.SelectionColor = word.Color;
             richTextBox1.AppendText(word.Content + '\n');
         }
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
-            WordV2 word = new WordV2(wordBox.Text.ToString(), colorDialog1.Color);
+            Word word = new Word(wordBox.Text.ToString(), colorDialog1.Color);
             richTextBox1.SelectionColor = word.Color;
             richTextBox1.AppendText(word.Content + '\n');
             wordBox.Text = "";
