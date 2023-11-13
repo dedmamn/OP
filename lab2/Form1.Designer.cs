@@ -38,6 +38,10 @@
             btnWordColor = new Button();
             btnClearRich = new Button();
             btnColored = new Button();
+            label3 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            numericUpDown1 = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // btnAddWord
@@ -61,7 +65,7 @@
             // 
             richTextBox1.Location = new Point(567, 65);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(318, 273);
+            richTextBox1.Size = new Size(614, 354);
             richTextBox1.TabIndex = 15;
             richTextBox1.Text = "";
             // 
@@ -105,7 +109,7 @@
             // 
             // btnClearRich
             // 
-            btnClearRich.Location = new Point(567, 358);
+            btnClearRich.Location = new Point(567, 444);
             btnClearRich.Name = "btnClearRich";
             btnClearRich.Size = new Size(150, 46);
             btnClearRich.TabIndex = 18;
@@ -115,7 +119,7 @@
             // 
             // btnColored
             // 
-            btnColored.Location = new Point(20, 341);
+            btnColored.Location = new Point(20, 427);
             btnColored.Name = "btnColored";
             btnColored.Size = new Size(231, 63);
             btnColored.TabIndex = 19;
@@ -123,11 +127,37 @@
             btnColored.UseVisualStyleBackColor = true;
             btnColored.Click += btnColored_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(20, 219);
+            label3.Name = "label3";
+            label3.Size = new Size(65, 32);
+            label3.TabIndex = 20;
+            label3.Text = "Дата";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(29, 274);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(532, 39);
+            dateTimePicker1.TabIndex = 21;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(29, 357);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(240, 39);
+            numericUpDown1.TabIndex = 22;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(906, 425);
+            ClientSize = new Size(1215, 540);
+            Controls.Add(numericUpDown1);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(label3);
             Controls.Add(btnColored);
             Controls.Add(btnClearRich);
             Controls.Add(btnWordColor);
@@ -139,6 +169,7 @@
             Controls.Add(label2);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -157,5 +188,8 @@
         private Button btnWordColor;
         private Button btnClearRich;
         private Button btnColored;
+        private Label label3;
+        private DateTimePicker dateTimePicker1;
+        private NumericUpDown numericUpDown1;
     }
 }
