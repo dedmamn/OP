@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,9 +101,9 @@ namespace lab2
             }
         }
 
-        public static List<Word> ReadFromFile(OpenFileDialog openFileDialog)
+        public void ReadFromFile(OpenFileDialog openFileDialog, BindingList<Word> words)
         {
-            List<Word> words = new List<Word>();
+            
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (StreamReader sr = new StreamReader(openFileDialog.FileName))
@@ -123,12 +124,12 @@ namespace lab2
                     }
                 }
             }
-            return words;
+            
         }
 
-        public int ClalculateDays()
+        public int ClalculateDays(out int days)
         {
-            int days = (this.writeDate.Date - DateTime.Now.Date).Days;
+            days = (this.writeDate.Date - DateTime.Now.Date).Days;
             return days;
         }
 

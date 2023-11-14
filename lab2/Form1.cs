@@ -91,11 +91,9 @@ namespace lab2
         private void btnOpenWordFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            List<Word> wordList = Word.ReadFromFile(fileDialog);
-            foreach (Word word in wordList)
-            {
-                words.Add(word);
-            }
+            //List<Word> wordList = new List<Word>();
+            word.ReadFromFile(fileDialog, words);
+            
         }
 
         private void btnOpenFile_Click(object sender, EventArgs e)
@@ -126,7 +124,8 @@ namespace lab2
                     textBoxNumber.Text = selectedWord.Number.ToString();
                     dateTimePicker2.Value = selectedWord.writeDate;
                     btnItemColor.BackColor = selectedWord.Color;
-                    textBoxDays.Text = FormatDays(selectedWord.ClalculateDays());
+                    int days;
+                    textBoxDays.Text = FormatDays(selectedWord.ClalculateDays(out days));
                 }
             }
         }
