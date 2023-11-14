@@ -1,4 +1,3 @@
-using ClassLibrary;
 using System.ComponentModel;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -9,7 +8,7 @@ namespace lab2
     {
         public Structure structure;
         private BindingList<Word> words;
-        public Word word = new Word("Тест", "C:\\Users\\dedman\\Pictures\\kit.jpg");
+        public Word word = new Word();
 
         public Form1()
         {
@@ -36,7 +35,68 @@ namespace lab2
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        
+        private void writeToFile_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+
+                    foreach (Word word in words)
+                    {
+                        word.WriteToFile(filePath);
+                    }
+                }
+            }
+        }
+
+        public string FormatDays(int days)
+        {
+            if (days == 0)
+            {
+                return "сегодня";
+            }
+            else if (days == 1)
+            {
+                return "завтра";
+            }
+            else if (days == -1)
+            {
+                return "вчера";
+            }
+            else if (days > 1)
+            {
+                return $"через {days} " + GetDayWord(days);
+            }
+            else // days < -1
+            {
+                return $"{Math.Abs(days)} " + GetDayWord(days) + " назад";
+            }
+        }
+
+        private string GetDayWord(int days)
+        {
+            days = Math.Abs(days) % 100;
+            int lastDigit = days % 10;
+
+            if (days > 10 && days < 20) return "дней";
+            if (lastDigit > 1 && lastDigit < 5) return "дня";
+            if (lastDigit == 1) return "день";
+            return "дней";
+        }
+
+
+        private void btnOpenWordFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            List<Word> wordList = Word.ReadFromFile(fileDialog);
+            foreach (Word word in wordList)
+            {
+                words.Add(word);
+            }
+        }
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
@@ -55,7 +115,7 @@ namespace lab2
                 }
             }
         }
-        
+
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
@@ -64,8 +124,9 @@ namespace lab2
                 if (selectedWord != null)
                 {
                     textBoxNumber.Text = selectedWord.Number.ToString();
-                    dateTimePicker2.Value = structure.writeDate;
+                    dateTimePicker2.Value = selectedWord.writeDate;
                     btnItemColor.BackColor = selectedWord.Color;
+                    textBoxDays.Text = FormatDays(selectedWord.ClalculateDays());
                 }
             }
         }
@@ -90,7 +151,7 @@ namespace lab2
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
-            Word word = new Word(wordBox.Text.ToString(), colorDialog1.Color, (int)numericUpDown1.Value);
+            Word word = new Word(wordBox.Text.ToString(), colorDialog1.Color, (int)numericUpDown1.Value, dateTimePicker1.Value);
             structure.writeDate = dateTimePicker1.Value;
             words.Add(word);
             wordBox.Text = "";

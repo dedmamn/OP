@@ -48,9 +48,12 @@
             label6 = new Label();
             pictureBox1 = new PictureBox();
             label7 = new Label();
-            openFileDialog1 = new OpenFileDialog();
             button1 = new Button();
             dateTimePicker2 = new DateTimePicker();
+            button2 = new Button();
+            button3 = new Button();
+            label8 = new Label();
+            textBoxDays = new TextBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -112,9 +115,9 @@
             // 
             // btnClearRich
             // 
-            btnClearRich.Location = new Point(567, 461);
+            btnClearRich.Location = new Point(723, 29);
             btnClearRich.Name = "btnClearRich";
-            btnClearRich.Size = new Size(150, 46);
+            btnClearRich.Size = new Size(144, 46);
             btnClearRich.TabIndex = 18;
             btnClearRich.Text = "Очистить";
             btnClearRich.UseVisualStyleBackColor = true;
@@ -222,10 +225,6 @@
             label7.TabIndex = 32;
             label7.Text = "Картинка";
             // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
             // button1
             // 
             button1.Location = new Point(1331, 452);
@@ -243,11 +242,51 @@
             dateTimePicker2.Size = new Size(405, 39);
             dateTimePicker2.TabIndex = 34;
             // 
+            // button2
+            // 
+            button2.Location = new Point(717, 461);
+            button2.Name = "button2";
+            button2.Size = new Size(150, 46);
+            button2.TabIndex = 35;
+            button2.Text = "Прочитать";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += btnOpenWordFile_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(567, 461);
+            button3.Name = "button3";
+            button3.Size = new Size(144, 46);
+            button3.TabIndex = 36;
+            button3.Text = "Записать";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += writeToFile_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(907, 405);
+            label8.Name = "label8";
+            label8.Size = new Size(176, 32);
+            label8.TabIndex = 37;
+            label8.Text = "Текст написан:";
+            // 
+            // textBoxDays
+            // 
+            textBoxDays.Location = new Point(907, 444);
+            textBoxDays.Name = "textBoxDays";
+            textBoxDays.Size = new Size(200, 39);
+            textBoxDays.TabIndex = 38;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1716, 558);
+            ClientSize = new Size(1716, 566);
+            Controls.Add(textBoxDays);
+            Controls.Add(label8);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(dateTimePicker2);
             Controls.Add(button1);
             Controls.Add(label7);
@@ -301,8 +340,11 @@
         private Label label6;
         private PictureBox pictureBox1;
         private Label label7;
-        private OpenFileDialog openFileDialog1;
         private Button button1;
         private DateTimePicker dateTimePicker2;
+        private Button button2;
+        private Button button3;
+        private Label label8;
+        private TextBox textBoxDays;
     }
 }

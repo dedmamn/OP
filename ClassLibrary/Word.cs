@@ -7,6 +7,7 @@ namespace ClassLibrary
         private string _content;
         public int Number { get; set; }
         private string foto {  get; set; }
+        private string filePath { get; set; }
         public string Foto
         {
             get { return foto; }
@@ -53,6 +54,9 @@ namespace ClassLibrary
             else
                 Word.BackColor = Color.Aquamarine;
         }
+
+        
+
     }
 
     public struct Structure
