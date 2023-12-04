@@ -1,5 +1,8 @@
 using System.ComponentModel;
+using System.Diagnostics;
+
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace lab2
@@ -9,6 +12,7 @@ namespace lab2
         public Structure structure;
         private BindingList<Word> words;
         public Word word = new Word();
+
 
         public Form1()
         {
@@ -21,7 +25,7 @@ namespace lab2
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.CustomFormat = "dd.MM.yyyy hh:mm:ss";
 
-            numericUpDown1.Value = 1;
+            numericUpDown1.Value = 0;
             structure = new Structure(dateTimePicker1.Value);
             words = new BindingList<Word>();
 
@@ -68,10 +72,14 @@ namespace lab2
             }
             else if (days > 1)
             {
+                // Со string.Format - это выглядело бы так:
+                // return string.Format("через {0} {1}", days, GetDayWord(days))
                 return $"через {days} " + GetDayWord(days);
             }
             else // days < -1
             {
+                // Со string.Format - это выглядело бы так:
+                // return string.Format("{0} {1} назад", Math.Abs(days), GetDayWord(days))
                 return $"{Math.Abs(days)} " + GetDayWord(days) + " назад";
             }
         }
@@ -91,10 +99,16 @@ namespace lab2
         private void btnOpenWordFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            //List<Word> wordList = new List<Word>();
-            word.ReadFromFile(fileDialog, words);
-            
+
+            // Выводим количество слов до вызова ReadFromFile
+            Debug.WriteLine("До вызова ReadFromFile, количество слов в списке: " + words.Count);
+
+            word.ReadFromFile(fileDialog, ref words);
+
+            // Выводим количество слов после вызова ReadFromFile
+            Debug.WriteLine("После вызова ReadFromFile, количество слов в списке: " + words.Count);
         }
+
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
@@ -125,7 +139,8 @@ namespace lab2
                     dateTimePicker2.Value = selectedWord.writeDate;
                     btnItemColor.BackColor = selectedWord.Color;
                     int days;
-                    textBoxDays.Text = FormatDays(selectedWord.ClalculateDays(out days));
+                    selectedWord.ClalculateDays(out days);
+                    textBoxDays.Text = FormatDays(days);
                 }
             }
         }
@@ -150,6 +165,7 @@ namespace lab2
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
+
             Word word = new Word(wordBox.Text.ToString(), colorDialog1.Color, (int)numericUpDown1.Value, dateTimePicker1.Value);
             structure.writeDate = dateTimePicker1.Value;
             words.Add(word);

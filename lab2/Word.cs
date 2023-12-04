@@ -90,7 +90,7 @@ namespace lab2
             }
         }
 
-        public void WriteToFile(string filePath)
+        public void WriteToFile(string filePath = "C:\\Users\\dedman\\Documents\\")
         {
             if (filePath != null)
             {
@@ -101,7 +101,7 @@ namespace lab2
             }
         }
 
-        public void ReadFromFile(OpenFileDialog openFileDialog, BindingList<Word> words)
+        public void ReadFromFile(OpenFileDialog openFileDialog, ref BindingList<Word> words)
         {
             
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -127,10 +127,9 @@ namespace lab2
             
         }
 
-        public int ClalculateDays(out int days)
+        public void ClalculateDays(out int days)
         {
             days = (this.writeDate.Date - DateTime.Now.Date).Days;
-            return days;
         }
 
 
