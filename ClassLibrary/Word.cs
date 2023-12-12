@@ -1,92 +1,109 @@
-﻿using System.Drawing;
-namespace ClassLibrary
+﻿using ClassLibrary;
+using System.Drawing;
+
+
+namespace lab2
 {
-    public class Word
+    public class Word : TextElement
     {
+         
         public Color Color { get; set; }
-        private string _content;
-        public int Number { get; set; }
-        private string foto {  get; set; }
-        private string filePath { get; set; }
-        public string Foto
+        public DateTime WriteDate { get; set; }
+        public string? FilePath {  get; set; }
+
+        // Конструктор
+        public Word(string content, Color color, DateTime? dateTime = null, string? filePath = null) : base(content)
         {
-            get { return foto; }
-            set { foto = value; }
+            Color = color;
+            WriteDate = dateTime ?? DateTime.Now;
         }
 
-        public string Content
+        // Запись в файл
+        public override void WriteToFile(string path)
         {
-            get => _content;
-            set
+            if (path != null)
             {
-                if (!string.IsNullOrEmpty(value) && char.IsLower(value[0]))
+                using (StreamWriter sw = new StreamWriter(path, true))
                 {
-                    value = char.ToUpper(value[0]) + value.Substring(1);
+                    sw.WriteLine($"Content: {Content}, Color: {Color}, WriteDate: {WriteDate}");
                 }
-                _content = value;
+                FilePath = path;
             }
         }
 
-        public static readonly Color BackColor;
-
-        // Конструкторы
-        public Word(string content, Color color, int number)
+        // Чтение из файла
+        public override TextElement? CreateFromFile(string path)
         {
-            this.Content = content;
-            this.Color = color;
-            this.Number = number;
-        }
-        public Word(string content)
-        {
-            this.Content = content;
-        }
-        public Word(string content, string foto)
-        {
-            this.Content = content;
-            this.foto = foto;
-        }
-        public Word() : this("Word", Color.Red, 1) { }
-        static Word()
-        {
-            DateTime now = DateTime.Now;
-            if (now.Hour >= 0 && now.Hour < 12)
-                Word.BackColor = Color.BlueViolet;
-            else
-                Word.BackColor = Color.Aquamarine;
+            if (path != null)
+            {
+                string line = ReadLineFromFile(path);
+                if (line != null)
+                {
+                    FilePath = path;
+                    return CreateWordFromLine(line);
+                }
+            }
+            return null;
         }
 
-        
+        private string ReadLineFromFile(string path)
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                return sr.ReadLine();
+            }
+        }
+
+        public static Word CreateWordFromLine(string line)
+        {
+            string[] parts = line.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+
+            string contentPart = parts.FirstOrDefault(p => p.StartsWith("Content:"));
+            string colorPart = parts.FirstOrDefault(p => p.StartsWith("Color:"));
+            string datePart = parts.FirstOrDefault(p => p.StartsWith("WriteDate:"));
+
+            string content = contentPart?.Split(new string[] { ": " }, StringSplitOptions.None)[1];
+            string colorName = colorPart?.Split(new string[] { ": " }, StringSplitOptions.None)[1].Trim(new char[] { '[', ']' });
+            string dateString = datePart?.Split(new string[] { ": " }, StringSplitOptions.None)[1];
+
+            Color color = Color.FromName(colorName);
+            DateTime writeDate;
+
+            if (!DateTime.TryParse(dateString, out writeDate))
+            {
+                writeDate = DateTime.Now;
+            }
+            return new Word(content, color, writeDate);
+        }
+
+        public int ClalculateDays()
+        {
+            return (WriteDate.Date - DateTime.Now.Date).Days;
+        }
+
+        public int ClalculateDays(DateTime dateTime)
+        {
+            return (WriteDate.Date -  dateTime.Date).Days;
+        }
+
+        public int GetLength()
+        {
+            if (Content != null)
+            {
+                return Content.Length;
+            }
+            else return 0;
+            
+        }
+
+        public void CapitalizeFirstLetter()
+        {
+            if (!string.IsNullOrEmpty(Content))
+            {
+                Content = char.ToUpper(Content[0]) + Content.Substring(1);
+            }
+        }
 
     }
 
-    public struct Structure
-    {
-        public Word word;
-        public DateTime writeDate;
-        public Color backColor;
-        public Font formFont = new Font("Segoe UI", 9, FontStyle.Regular);
-
-        public Structure()
-        {
-            this.word = new Word();
-            this.writeDate = DateTime.Now;
-            this.backColor = Word.BackColor;
-            this.formFont = new Font("Arial", 12, FontStyle.Bold);
-        }
-
-        public Structure(string font)
-        {
-            this.word = new Word();
-            this.writeDate = DateTime.Now;
-            this.backColor = Word.BackColor;
-            this.formFont = new Font(font, 12, FontStyle.Bold);
-        }
-
-        public Structure(DateTime dateTime)
-        {
-            this.word = new Word();
-            this.backColor = Word.BackColor;
-            this.writeDate = dateTime;
-        }
-    }
 }

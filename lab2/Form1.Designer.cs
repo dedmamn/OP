@@ -32,30 +32,18 @@
             wordBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            colorDialog1 = new ColorDialog();
-            btnAddWithoutParam = new Button();
             btnWordColor = new Button();
-            btnClearRich = new Button();
-            btnColored = new Button();
+            btnClearListWord = new Button();
             label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
-            numericUpDown1 = new NumericUpDown();
+            listBoxWords = new ListBox();
+            btnReadWord = new Button();
+            btnWriteWord = new Button();
             label4 = new Label();
+            colorDialogWord = new ColorDialog();
             label5 = new Label();
-            textBoxNumber = new TextBox();
+            btnUpstreamWord = new Button();
             listBox1 = new ListBox();
-            btnItemColor = new Button();
-            label6 = new Label();
-            pictureBox1 = new PictureBox();
-            label7 = new Label();
-            button1 = new Button();
-            dateTimePicker2 = new DateTimePicker();
-            button2 = new Button();
-            button3 = new Button();
-            label8 = new Label();
-            textBoxDays = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnAddWord
@@ -70,7 +58,8 @@
             // 
             // wordBox
             // 
-            wordBox.Location = new Point(20, 81);
+            wordBox.ForeColor = Color.Black;
+            wordBox.Location = new Point(20, 84);
             wordBox.Name = "wordBox";
             wordBox.Size = new Size(296, 39);
             wordBox.TabIndex = 10;
@@ -87,25 +76,15 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(567, 30);
+            label2.Location = new Point(20, 288);
             label2.Name = "label2";
             label2.Size = new Size(81, 32);
             label2.TabIndex = 12;
             label2.Text = "Слова";
             // 
-            // btnAddWithoutParam
-            // 
-            btnAddWithoutParam.Location = new Point(330, 136);
-            btnAddWithoutParam.Name = "btnAddWithoutParam";
-            btnAddWithoutParam.Size = new Size(192, 62);
-            btnAddWithoutParam.TabIndex = 16;
-            btnAddWithoutParam.Text = "ДобавитьTest";
-            btnAddWithoutParam.UseVisualStyleBackColor = true;
-            btnAddWithoutParam.Click += btnAddWithoutParam_Click;
-            // 
             // btnWordColor
             // 
-            btnWordColor.Location = new Point(20, 144);
+            btnWordColor.Location = new Point(350, 140);
             btnWordColor.Name = "btnWordColor";
             btnWordColor.Size = new Size(150, 46);
             btnWordColor.TabIndex = 17;
@@ -113,30 +92,20 @@
             btnWordColor.UseVisualStyleBackColor = true;
             btnWordColor.Click += btnWordColor_Click;
             // 
-            // btnClearRich
+            // btnClearListWord
             // 
-            btnClearRich.Location = new Point(723, 29);
-            btnClearRich.Name = "btnClearRich";
-            btnClearRich.Size = new Size(144, 46);
-            btnClearRich.TabIndex = 18;
-            btnClearRich.Text = "Очистить";
-            btnClearRich.UseVisualStyleBackColor = true;
-            btnClearRich.Click += btnClearRich_Click;
-            // 
-            // btnColored
-            // 
-            btnColored.Location = new Point(20, 444);
-            btnColored.Name = "btnColored";
-            btnColored.Size = new Size(231, 63);
-            btnColored.TabIndex = 19;
-            btnColored.Text = "Покрасить форму";
-            btnColored.UseVisualStyleBackColor = true;
-            btnColored.Click += btnColored_Click;
+            btnClearListWord.Location = new Point(356, 281);
+            btnClearListWord.Name = "btnClearListWord";
+            btnClearListWord.Size = new Size(144, 46);
+            btnClearListWord.TabIndex = 18;
+            btnClearListWord.Text = "Очистить";
+            btnClearListWord.UseVisualStyleBackColor = true;
+            btnClearListWord.Click += btnClearListWord_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 219);
+            label3.Location = new Point(20, 154);
             label3.Name = "label3";
             label3.Size = new Size(65, 32);
             label3.TabIndex = 20;
@@ -144,174 +113,99 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(29, 274);
+            dateTimePicker1.Location = new Point(20, 212);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(471, 39);
+            dateTimePicker1.Size = new Size(480, 39);
             dateTimePicker1.TabIndex = 21;
             // 
-            // numericUpDown1
+            // listBoxWords
             // 
-            numericUpDown1.Location = new Point(29, 357);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(240, 39);
-            numericUpDown1.TabIndex = 22;
+            listBoxWords.FormattingEnabled = true;
+            listBoxWords.ItemHeight = 32;
+            listBoxWords.Location = new Point(20, 339);
+            listBoxWords.Name = "listBoxWords";
+            listBoxWords.Size = new Size(480, 356);
+            listBoxWords.TabIndex = 28;
+            // 
+            // btnReadWord
+            // 
+            btnReadWord.Location = new Point(350, 719);
+            btnReadWord.Name = "btnReadWord";
+            btnReadWord.Size = new Size(150, 46);
+            btnReadWord.TabIndex = 35;
+            btnReadWord.Text = "Прочитать";
+            btnReadWord.UseVisualStyleBackColor = true;
+            btnReadWord.Click += btnReadWord_Click;
+            // 
+            // btnWriteWord
+            // 
+            btnWriteWord.Location = new Point(20, 719);
+            btnWriteWord.Name = "btnWriteWord";
+            btnWriteWord.Size = new Size(144, 46);
+            btnWriteWord.TabIndex = 36;
+            btnWriteWord.Text = "Записать";
+            btnWriteWord.UseVisualStyleBackColor = true;
+            btnWriteWord.Click += writeToFile_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(900, 147);
+            label4.Location = new Point(593, 31);
             label4.Name = "label4";
-            label4.Size = new Size(65, 32);
-            label4.TabIndex = 25;
-            label4.Text = "Дата";
+            label4.Size = new Size(169, 32);
+            label4.TabIndex = 38;
+            label4.Text = "Предложения";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(900, 31);
+            label5.Location = new Point(1111, 31);
             label5.Name = "label5";
-            label5.Size = new Size(89, 32);
-            label5.TabIndex = 27;
-            label5.Text = "Номер";
+            label5.Size = new Size(0, 32);
+            label5.TabIndex = 39;
             // 
-            // textBoxNumber
+            // btnUpstreamWord
             // 
-            textBoxNumber.Location = new Point(900, 82);
-            textBoxNumber.Name = "textBoxNumber";
-            textBoxNumber.Size = new Size(89, 39);
-            textBoxNumber.TabIndex = 26;
+            btnUpstreamWord.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnUpstreamWord.Location = new Point(506, 494);
+            btnUpstreamWord.Name = "btnUpstreamWord";
+            btnUpstreamWord.Size = new Size(55, 43);
+            btnUpstreamWord.TabIndex = 40;
+            btnUpstreamWord.Text = "->";
+            btnUpstreamWord.UseVisualStyleBackColor = true;
+            btnUpstreamWord.Click += btnUpstreamWords_Click;
             // 
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 32;
-            listBox1.Location = new Point(567, 81);
+            listBox1.Location = new Point(593, 77);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(300, 356);
-            listBox1.TabIndex = 28;
-            // 
-            // btnItemColor
-            // 
-            btnItemColor.Enabled = false;
-            btnItemColor.Location = new Point(900, 322);
-            btnItemColor.Name = "btnItemColor";
-            btnItemColor.Size = new Size(65, 65);
-            btnItemColor.TabIndex = 29;
-            btnItemColor.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(900, 279);
-            label6.Name = "label6";
-            label6.Size = new Size(143, 32);
-            label6.TabIndex = 30;
-            label6.Text = "Цвет текста";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(1331, 81);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(350, 350);
-            pictureBox1.TabIndex = 31;
-            pictureBox1.TabStop = false;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(1331, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(116, 32);
-            label7.TabIndex = 32;
-            label7.Text = "Картинка";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(1331, 452);
-            button1.Name = "button1";
-            button1.Size = new Size(228, 46);
-            button1.TabIndex = 33;
-            button1.Text = "Выбор картинки";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnOpenFile_Click;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(900, 212);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(405, 39);
-            dateTimePicker2.TabIndex = 34;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(717, 461);
-            button2.Name = "button2";
-            button2.Size = new Size(150, 46);
-            button2.TabIndex = 35;
-            button2.Text = "Прочитать";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += btnOpenWordFile_Click;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(567, 461);
-            button3.Name = "button3";
-            button3.Size = new Size(144, 46);
-            button3.TabIndex = 36;
-            button3.Text = "Записать";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += writeToFile_Click;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(907, 405);
-            label8.Name = "label8";
-            label8.Size = new Size(176, 32);
-            label8.TabIndex = 37;
-            label8.Text = "Текст написан:";
-            // 
-            // textBoxDays
-            // 
-            textBoxDays.Location = new Point(907, 444);
-            textBoxDays.Name = "textBoxDays";
-            textBoxDays.Size = new Size(200, 39);
-            textBoxDays.TabIndex = 38;
+            listBox1.Size = new Size(483, 260);
+            listBox1.TabIndex = 41;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1716, 566);
-            Controls.Add(textBoxDays);
-            Controls.Add(label8);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(button1);
-            Controls.Add(label7);
-            Controls.Add(pictureBox1);
-            Controls.Add(label6);
-            Controls.Add(btnItemColor);
+            ClientSize = new Size(1679, 879);
             Controls.Add(listBox1);
+            Controls.Add(btnUpstreamWord);
             Controls.Add(label5);
-            Controls.Add(textBoxNumber);
             Controls.Add(label4);
-            Controls.Add(numericUpDown1);
+            Controls.Add(btnWriteWord);
+            Controls.Add(btnReadWord);
+            Controls.Add(listBoxWords);
             Controls.Add(dateTimePicker1);
             Controls.Add(label3);
-            Controls.Add(btnColored);
-            Controls.Add(btnClearRich);
+            Controls.Add(btnClearListWord);
             Controls.Add(btnWordColor);
-            Controls.Add(btnAddWithoutParam);
             Controls.Add(btnAddWord);
             Controls.Add(wordBox);
             Controls.Add(label1);
             Controls.Add(label2);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -324,27 +218,17 @@
         private Label label1;
         private Button btnClearSentence;
         private Label label2;
-        private ColorDialog colorDialog1;
-        private Button btnAddWithoutParam;
         private Button btnWordColor;
-        private Button btnClearRich;
-        private Button btnColored;
+        private Button btnClearListWord;
         private Label label3;
         private DateTimePicker dateTimePicker1;
-        private NumericUpDown numericUpDown1;
+        private ListBox listBoxWords;
+        private Button btnReadWord;
+        private Button btnWriteWord;
         private Label label4;
+        private ColorDialog colorDialogWord;
         private Label label5;
-        private TextBox textBoxNumber;
+        private Button btnUpstreamWord;
         private ListBox listBox1;
-        private Button btnItemColor;
-        private Label label6;
-        private PictureBox pictureBox1;
-        private Label label7;
-        private Button button1;
-        private DateTimePicker dateTimePicker2;
-        private Button button2;
-        private Button button3;
-        private Label label8;
-        private TextBox textBoxDays;
     }
 }

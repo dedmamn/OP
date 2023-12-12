@@ -1,42 +1,44 @@
+using ClassLibrary;
 using System.ComponentModel;
 using System.Diagnostics;
 
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace lab2
 {
     public partial class Form1 : Form
     {
-        public Structure structure;
-        private BindingList<Word> words;
-        public Word word = new Word();
-
+        public WordList wordList;
 
         public Form1()
         {
             InitializeComponent();
-            colorDialog1.AllowFullOpen = false;
-            colorDialog1.ShowHelp = true;
-            colorDialog1.Color = wordBox.ForeColor;
+            colorDialogWord.AllowFullOpen = false;
+            colorDialogWord.ShowHelp = true;
+            colorDialogWord.Color = wordBox.ForeColor;
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "dd.MM.yyyy hh:mm:ss";
-            dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.CustomFormat = "dd.MM.yyyy hh:mm:ss";
 
-            numericUpDown1.Value = 0;
-            structure = new Structure(dateTimePicker1.Value);
-            words = new BindingList<Word>();
+            wordList = new WordList(new List<Word>());
 
-            listBox1.DataSource = words;
-            listBox1.DisplayMember = "Content";
-            listBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            listBox1.DrawItem += ListBox1_DrawItem;
-            listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
+            listBoxWords.DataSource = wordList.Words;
+            listBoxWords.DisplayMember = "Content";
+            listBoxWords.DrawMode = DrawMode.OwnerDrawFixed;
+            listBoxWords.DrawItem += ListBox1_DrawItem;
+        }
 
-            pictureBox1.ImageLocation = word.Foto;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            Word word = listBoxWords.Items[e.Index] as Word;
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(word.Color))
+            {
+                e.Graphics.DrawString(word.Content, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle();
         }
 
         private void writeToFile_Click(object sender, EventArgs e)
@@ -44,43 +46,63 @@ namespace lab2
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.DefaultExt = "txt";
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog.FileName;
 
-                    foreach (Word word in words)
+                    // Проверяем, что расширение .txt установлено
+                    if (!filePath.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
                     {
-                        word.WriteToFile(filePath);
+                        filePath = Path.ChangeExtension(filePath, ".txt");
                     }
+
+                    wordList.WriteWordListToFile(filePath);
                 }
             }
         }
 
+        private void btnReadWord_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = openFileDialog.FileName;
+
+                    // Вызовите метод ReadWordListFromFile, передав путь к выбранному файлу
+                    wordList.ReadWordListFromFile(filePath);
+                }
+            }
+            updateDataSource(listBoxWords);
+        }
+
+
+        /* Два метода для правильного написания количества дней до записи*/
         public string FormatDays(int days)
         {
-            if (days == 0)
+            switch (days)
             {
-                return "сегодня";
-            }
-            else if (days == 1)
-            {
-                return "завтра";
-            }
-            else if (days == -1)
-            {
-                return "вчера";
-            }
-            else if (days > 1)
-            {
-                // Со string.Format - это выглядело бы так:
-                // return string.Format("через {0} {1}", days, GetDayWord(days))
-                return $"через {days} " + GetDayWord(days);
-            }
-            else // days < -1
-            {
-                // Со string.Format - это выглядело бы так:
-                // return string.Format("{0} {1} назад", Math.Abs(days), GetDayWord(days))
-                return $"{Math.Abs(days)} " + GetDayWord(days) + " назад";
+                case 0:
+                    return "сегодня";
+                case 1:
+                    return "завтра";
+                case -1:
+                    return "вчера";
+                default:
+                    if (days > 1)
+                    {
+                        return $"через {days} {GetDayWord(days)}";
+                    }
+                    else // days < -1
+                    {
+                        return $"{Math.Abs(days)} {GetDayWord(days)} назад";
+                    }
             }
         }
 
@@ -94,102 +116,60 @@ namespace lab2
             if (lastDigit == 1) return "день";
             return "дней";
         }
-
-
-        private void btnOpenWordFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            // Выводим количество слов до вызова ReadFromFile
-            Debug.WriteLine("До вызова ReadFromFile, количество слов в списке: " + words.Count);
-
-            word.ReadFromFile(fileDialog, ref words);
-
-            // Выводим количество слов после вызова ReadFromFile
-            Debug.WriteLine("После вызова ReadFromFile, количество слов в списке: " + words.Count);
-        }
-
-
-        private void btnOpenFile_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Получение пути к выбранному файлу
-                    string filePath = openFileDialog.FileName;
-
-                    // Загрузка изображения и его отображение в PictureBox
-                    pictureBox1.ImageLocation = filePath;
-                }
-            }
-        }
-
-        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedIndex != -1)
-            {
-                Word selectedWord = listBox1.SelectedItem as Word;
-                if (selectedWord != null)
-                {
-                    textBoxNumber.Text = selectedWord.Number.ToString();
-                    dateTimePicker2.Value = selectedWord.writeDate;
-                    btnItemColor.BackColor = selectedWord.Color;
-                    int days;
-                    selectedWord.ClalculateDays(out days);
-                    textBoxDays.Text = FormatDays(days);
-                }
-            }
-        }
-
-        private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-
-            Word word = listBox1.Items[e.Index] as Word;
-            e.DrawBackground();
-            using (Brush brush = new SolidBrush(word.Color))
-            {
-                e.Graphics.DrawString(word.Content, e.Font, brush, e.Bounds);
-            }
-            e.DrawFocusRectangle();
-        }
-
-        private void btnAddWithoutParam_Click(object sender, EventArgs e)
-        {
-            words.Add(word);
-        }
+        /* Конец */
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
+            string content = wordBox.Text;
+            Color color = wordBox.ForeColor;
+            DateTime dateTime = dateTimePicker1.Value;
 
-            Word word = new Word(wordBox.Text.ToString(), colorDialog1.Color, (int)numericUpDown1.Value, dateTimePicker1.Value);
-            structure.writeDate = dateTimePicker1.Value;
-            words.Add(word);
-            wordBox.Text = "";
-            numericUpDown1.Value += 1;
+            Word newWord = new Word(content, color, dateTime);
+
+            wordList.Words.Add(newWord);
+            clearBox(wordBox);
+            updateDataSource(listBoxWords);
+
+        }
+
+        // Очистка textBox
+        private void clearBox(TextBox textBox)
+        {
+            textBox.Text = string.Empty;
+            textBox.ForeColor = Color.Black;
+            dateTimePicker1.Value = DateTime.Now;
+        }
+
+        // Обновление listBox
+        private void updateDataSource(ListBox listBox)
+        {
+            listBox.DataSource = null;
+            listBox.DataSource = wordList.Words;
+            listBox.DisplayMember = "Content";
         }
 
         private void btnWordColor_Click(object sender, EventArgs e)
         {
-            colorDialog1.ShowDialog();
-            wordBox.ForeColor = colorDialog1.Color;
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    wordBox.ForeColor = colorDialog.Color;
+                }
+            }
         }
 
-        private void btnClearRich_Click(object sender, EventArgs e)
+        private void btnClearListWord_Click(object sender, EventArgs e)
         {
-            words.Clear();
+            wordList.Words.Clear();
+            updateDataSource(listBoxWords);
         }
 
-        private void btnColored_Click(object sender, EventArgs e)
+        private void btnUpstreamWords_Click(object sender, EventArgs e)
         {
-            structure = new Structure();
 
-            this.BackColor = structure.backColor;
-            this.Font = structure.formFont;
         }
+
+
     }
 }
