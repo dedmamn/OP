@@ -3,21 +3,21 @@
   <Class Name="ClassLibrary.Paragraph" Collapsed="true">
     <Position X="5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Paragraph.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ClassLibrary.Sentence" Collapsed="true">
-    <Position X="3" Y="4.25" Width="1.5" />
+    <Position X="7" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAAAAEAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>Sentence.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="lab2.Word" Collapsed="true">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAABAAAAEAAAAAgAAAEAAAAhAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAABgAAAEAAAAAgAAAEAABAhAAAgAA=</HashCode>
       <FileName>Word.cs</FileName>
     </TypeIdentifier>
   </Class>

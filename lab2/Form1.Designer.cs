@@ -43,7 +43,11 @@
             colorDialogWord = new ColorDialog();
             label5 = new Label();
             btnUpstreamWord = new Button();
-            listBox1 = new ListBox();
+            listBoxSentences = new ListBox();
+            btnDownstreamWord = new Button();
+            labelWordLength = new Label();
+            label7 = new Label();
+            labelSentenceLength = new Label();
             SuspendLayout();
             // 
             // btnAddWord
@@ -126,10 +130,11 @@
             listBoxWords.Name = "listBoxWords";
             listBoxWords.Size = new Size(480, 356);
             listBoxWords.TabIndex = 28;
+            listBoxWords.SelectedIndexChanged += listBoxWords_SelectedIndexChanged;
             // 
             // btnReadWord
             // 
-            btnReadWord.Location = new Point(350, 719);
+            btnReadWord.Location = new Point(350, 755);
             btnReadWord.Name = "btnReadWord";
             btnReadWord.Size = new Size(150, 46);
             btnReadWord.TabIndex = 35;
@@ -139,7 +144,7 @@
             // 
             // btnWriteWord
             // 
-            btnWriteWord.Location = new Point(20, 719);
+            btnWriteWord.Location = new Point(20, 755);
             btnWriteWord.Name = "btnWriteWord";
             btnWriteWord.Size = new Size(144, 46);
             btnWriteWord.TabIndex = 36;
@@ -150,7 +155,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(593, 31);
+            label4.Location = new Point(579, 295);
             label4.Name = "label4";
             label4.Size = new Size(169, 32);
             label4.TabIndex = 38;
@@ -166,30 +171,71 @@
             // 
             // btnUpstreamWord
             // 
-            btnUpstreamWord.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnUpstreamWord.Location = new Point(506, 494);
+            btnUpstreamWord.Location = new Point(506, 445);
             btnUpstreamWord.Name = "btnUpstreamWord";
-            btnUpstreamWord.Size = new Size(55, 43);
+            btnUpstreamWord.Size = new Size(69, 43);
             btnUpstreamWord.TabIndex = 40;
             btnUpstreamWord.Text = "->";
             btnUpstreamWord.UseVisualStyleBackColor = true;
             btnUpstreamWord.Click += btnUpstreamWords_Click;
             // 
-            // listBox1
+            // listBoxSentences
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 32;
-            listBox1.Location = new Point(593, 77);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(483, 260);
-            listBox1.TabIndex = 41;
+            listBoxSentences.FormattingEnabled = true;
+            listBoxSentences.ItemHeight = 32;
+            listBoxSentences.Location = new Point(581, 339);
+            listBoxSentences.Name = "listBoxSentences";
+            listBoxSentences.Size = new Size(483, 356);
+            listBoxSentences.TabIndex = 41;
+            listBoxSentences.SelectedIndexChanged += listBoxSentences_SelectedIndexChanged;
+            // 
+            // btnDownstreamWord
+            // 
+            btnDownstreamWord.Location = new Point(506, 509);
+            btnDownstreamWord.Name = "btnDownstreamWord";
+            btnDownstreamWord.Size = new Size(69, 43);
+            btnDownstreamWord.TabIndex = 42;
+            btnDownstreamWord.Text = "<-";
+            btnDownstreamWord.UseVisualStyleBackColor = true;
+            btnDownstreamWord.Click += btnDownstreamWord_Click;
+            // 
+            // labelWordLength
+            // 
+            labelWordLength.AutoSize = true;
+            labelWordLength.Location = new Point(20, 709);
+            labelWordLength.Name = "labelWordLength";
+            labelWordLength.Size = new Size(166, 32);
+            labelWordLength.TabIndex = 43;
+            labelWordLength.Text = "Длина слова: ";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(665, 869);
+            label7.Name = "label7";
+            label7.Size = new Size(78, 32);
+            label7.TabIndex = 44;
+            label7.Text = "label7";
+            // 
+            // labelSentenceLength
+            // 
+            labelSentenceLength.AutoSize = true;
+            labelSentenceLength.Location = new Point(581, 709);
+            labelSentenceLength.Name = "labelSentenceLength";
+            labelSentenceLength.Size = new Size(255, 32);
+            labelSentenceLength.TabIndex = 46;
+            labelSentenceLength.Text = "Длина предложения: ";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1679, 879);
-            Controls.Add(listBox1);
+            ClientSize = new Size(1118, 879);
+            Controls.Add(labelSentenceLength);
+            Controls.Add(label7);
+            Controls.Add(labelWordLength);
+            Controls.Add(btnDownstreamWord);
+            Controls.Add(listBoxSentences);
             Controls.Add(btnUpstreamWord);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -229,6 +275,10 @@
         private ColorDialog colorDialogWord;
         private Label label5;
         private Button btnUpstreamWord;
-        private ListBox listBox1;
+        private ListBox listBoxSentences;
+        private Button btnDownstreamWord;
+        private Label labelWordLength;
+        private Label label7;
+        private Label labelSentenceLength;
     }
 }

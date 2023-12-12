@@ -12,6 +12,7 @@ namespace lab2
         public string? FilePath {  get; set; }
 
         // Конструктор
+        public Word() { }
         public Word(string content, Color color, DateTime? dateTime = null, string? filePath = null) : base(content)
         {
             Color = color;
@@ -25,7 +26,7 @@ namespace lab2
             {
                 using (StreamWriter sw = new StreamWriter(path, true))
                 {
-                    sw.WriteLine($"Content: {Content}, Color: {Color}, WriteDate: {WriteDate}");
+                    sw.WriteLine($"Content: {Content}, Color: {Color.ToArgb()}, WriteDate: {WriteDate}");
                 }
                 FilePath = path;
             }
@@ -63,17 +64,20 @@ namespace lab2
             string datePart = parts.FirstOrDefault(p => p.StartsWith("WriteDate:"));
 
             string content = contentPart?.Split(new string[] { ": " }, StringSplitOptions.None)[1];
-            string colorName = colorPart?.Split(new string[] { ": " }, StringSplitOptions.None)[1].Trim(new char[] { '[', ']' });
-            string dateString = datePart?.Split(new string[] { ": " }, StringSplitOptions.None)[1];
-
-            Color color = Color.FromName(colorName);
-            DateTime writeDate;
-
-            if (!DateTime.TryParse(dateString, out writeDate))
+            int colorArgb;
+            if (int.TryParse(colorPart?.Split(new string[] { ": " }, StringSplitOptions.None)[1], out colorArgb))
             {
-                writeDate = DateTime.Now;
+                Color color = Color.FromArgb(colorArgb);
+                DateTime writeDate;
+                string dateString = datePart?.Split(new string[] { ": " }, StringSplitOptions.None)[1];
+
+                if (!DateTime.TryParse(dateString, out writeDate))
+                {
+                    writeDate = DateTime.Now;
+                }
+                return new Word(content, color, writeDate);
             }
-            return new Word(content, color, writeDate);
+            return null;
         }
 
         public int ClalculateDays()
@@ -104,6 +108,13 @@ namespace lab2
             }
         }
 
+        public void PrintDetails()
+        {
+            Console.WriteLine($"Content: {Content}");
+            Console.WriteLine($"Color: {Color}");
+            Console.WriteLine($"Write Date: {WriteDate}");
+            Console.WriteLine($"Length: {GetLength()} characters");
+        }
     }
 
 }

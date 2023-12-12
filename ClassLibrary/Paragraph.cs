@@ -7,11 +7,11 @@ namespace ClassLibrary
 {
     public class Paragraph : TextElement
     {
-        private List<Sentence> Sentences { get; set; }
+        private new List<Sentence> Content { get; set; }
 
         public Paragraph(List<Sentence> sentences)
         {
-            Sentences = sentences;
+            Content = sentences;
         }
 
         public override TextElement? CreateFromFile(string path)

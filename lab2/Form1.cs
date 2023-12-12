@@ -9,7 +9,8 @@ namespace lab2
 {
     public partial class Form1 : Form
     {
-        public WordList wordList;
+        public WordList wordList = new WordList(new List<Word>());
+        public SentenceList sentenceList = new SentenceList(new List<Sentence>());
 
         public Form1()
         {
@@ -20,8 +21,7 @@ namespace lab2
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "dd.MM.yyyy hh:mm:ss";
 
-            wordList = new WordList(new List<Word>());
-
+            listBoxWords.SelectionMode = SelectionMode.MultiExtended;
             listBoxWords.DataSource = wordList.Words;
             listBoxWords.DisplayMember = "Content";
             listBoxWords.DrawMode = DrawMode.OwnerDrawFixed;
@@ -148,6 +148,13 @@ namespace lab2
             listBox.DisplayMember = "Content";
         }
 
+        private void updateDataSourceSen(ListBox listBox)
+        {
+            listBox.DataSource = null;
+            listBox.DataSource = sentenceList.Sentences;
+            listBox.DisplayMember = "str";
+        }
+
         private void btnWordColor_Click(object sender, EventArgs e)
         {
             using (ColorDialog colorDialog = new ColorDialog())
@@ -167,9 +174,65 @@ namespace lab2
 
         private void btnUpstreamWords_Click(object sender, EventArgs e)
         {
+            List<Word> selectedWords = listBoxWords.SelectedItems.Cast<Word>().ToList();
 
+            if (selectedWords.Count > 0)
+            {
+                Sentence sentence = new Sentence(selectedWords);
+
+                foreach (Word selectedWord in selectedWords)
+                {
+                    wordList.Words.Remove(selectedWord);
+                }
+
+                updateDataSource(listBoxWords);
+
+                sentenceList.Sentences.Add(sentence);
+
+                updateDataSourceSen(listBoxSentences);
+            }
         }
 
 
+
+        private void btnDownstreamWord_Click(object sender, EventArgs e)
+        {
+            if (listBoxSentences.SelectedItems != null)
+            {
+                Sentence selectedSentence = listBoxSentences.SelectedItem as Sentence;
+
+                if (selectedSentence != null)
+                {
+                    wordList.Words.Clear();
+
+                    foreach (Word word in selectedSentence.Content)
+                    {
+                        Word newWord = new Word(word.Content, word.Color, word.WriteDate);
+
+                        wordList.Words.Add(newWord);
+                    }
+
+                    updateDataSource(listBoxWords);
+                }
+            }
+        }
+
+        private void listBoxWords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxWords.SelectedItem != null)
+            {
+                Word selectedWord = (Word)listBoxWords.SelectedItem;
+                labelWordLength.Text = $"Длина слова: {selectedWord.GetLength()} символов";
+            }
+        }
+
+        private void listBoxSentences_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxSentences.SelectedItem != null)
+            {
+                Sentence selectedSentece = (Sentence)listBoxSentences.SelectedItem;
+                labelSentenceLength.Text = $"Длина предложения: {selectedSentece.GetLength()} слов";
+            }
+        }
     }
 }
