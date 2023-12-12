@@ -3,7 +3,7 @@ namespace ClassLibrary
 {
     public abstract class TextElement
     {
-        public string? Content { get; set; }
+        public virtual string? Content { get; set; }
 
         protected TextElement() { }
 

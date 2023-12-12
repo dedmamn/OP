@@ -6,7 +6,7 @@ namespace lab2
 {
     public class Word : TextElement
     {
-         
+        public override string Content { get; set; }
         public Color Color { get; set; }
         public DateTime WriteDate { get; set; }
         public string? FilePath {  get; set; }
@@ -114,6 +114,11 @@ namespace lab2
             Console.WriteLine($"Color: {Color}");
             Console.WriteLine($"Write Date: {WriteDate}");
             Console.WriteLine($"Length: {GetLength()} characters");
+        }
+
+        public sealed override void Delete()
+        {
+            base.Delete();
         }
     }
 
