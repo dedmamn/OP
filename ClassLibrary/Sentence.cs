@@ -1,4 +1,5 @@
 ﻿using lab2;
+using System.IO;
 using System.Text;
 
 namespace ClassLibrary
@@ -44,5 +45,43 @@ namespace ClassLibrary
             base.PrintDetails(); // Вызываем метод PrintDetails из базового класса (Word)
             Console.WriteLine($"Word Count: {GetLength()} words");
         }
+
+        public void WriteToFile(string path)
+        {
+            if (path != null)
+            {
+                foreach (Word word in Content)
+                {
+                    // Используем метод WriteToFile из класса Word для записи каждого слова
+                    word.WriteToFile(path);
+                }
+            }
+        }
+
+        public static Sentence? CreateFromFile(string path)
+        {
+            if (path == null)
+            {
+                return null;
+            }
+
+            List<Word> words = new List<Word>();
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Word word = Word.CreateWordFromLine(line); // используем существующий метод из класса Word
+                    if (word != null)
+                    {
+                        words.Add(word);
+                    }
+                }
+            }
+
+            return new Sentence(words);
+        }
+
     }
 }

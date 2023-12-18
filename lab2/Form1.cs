@@ -9,7 +9,7 @@ namespace lab2
 {
     public partial class Form1 : Form
     {
-        public WordList wordList = new WordList(new List<Word>());
+        public WordList wordListBox = new WordList(new List<Word>());
         public SentenceList sentenceList = new SentenceList(new List<Sentence>());
 
         public Form1()
@@ -18,15 +18,11 @@ namespace lab2
             colorDialogWord.AllowFullOpen = false;
             colorDialogWord.ShowHelp = true;
             colorDialogWord.Color = wordBox.ForeColor;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "dd.MM.yyyy hh:mm:ss";
 
-            listBoxWords.SelectionMode = SelectionMode.MultiExtended;
-            listBoxWords.DataSource = wordList.Words;
-            listBoxWords.DisplayMember = "Content";
             listBoxWords.DrawMode = DrawMode.OwnerDrawFixed;
-            listBoxWords.DrawItem += ListBox1_DrawItem;
+            listBoxWords.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
         }
+
 
         private void ListBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -40,6 +36,7 @@ namespace lab2
             }
             e.DrawFocusRectangle();
         }
+
 
         private void writeToFile_Click(object sender, EventArgs e)
         {
@@ -59,10 +56,11 @@ namespace lab2
                         filePath = Path.ChangeExtension(filePath, ".txt");
                     }
 
-                    wordList.WriteWordListToFile(filePath);
+                    wordListBox.WriteWordListToFile(filePath);
                 }
             }
         }
+
 
         private void btnReadWord_Click(object sender, EventArgs e)
         {
@@ -75,15 +73,16 @@ namespace lab2
                 {
                     string filePath = openFileDialog.FileName;
 
-                    // Вызовите метод ReadWordListFromFile, передав путь к выбранному файлу
-                    wordList.ReadWordListFromFile(filePath);
+                    wordListBox.ReadWordListFromFile(filePath);
                 }
             }
             updateDataSource(listBoxWords);
         }
 
 
+
         /* Два метода для правильного написания количества дней до записи*/
+        /*
         public string FormatDays(int days)
         {
             switch (days)
@@ -105,7 +104,8 @@ namespace lab2
                     }
             }
         }
-
+        */
+        /*
         private string GetDayWord(int days)
         {
             days = Math.Abs(days) % 100;
@@ -122,11 +122,10 @@ namespace lab2
         {
             string content = wordBox.Text;
             Color color = wordBox.ForeColor;
-            DateTime dateTime = dateTimePicker1.Value;
 
-            Word newWord = new Word(content, color, dateTime);
+            Word newWord = new Word(content, color);
 
-            wordList.Words.Add(newWord);
+            wordListBox.Words.Add(newWord);
             clearBox(wordBox);
             updateDataSource(listBoxWords);
 
@@ -137,23 +136,16 @@ namespace lab2
         {
             textBox.Text = string.Empty;
             textBox.ForeColor = Color.Black;
-            dateTimePicker1.Value = DateTime.Now;
         }
 
         // Обновление listBox
         private void updateDataSource(ListBox listBox)
         {
             listBox.DataSource = null;
-            listBox.DataSource = wordList.Words;
+            listBox.DataSource = wordListBox.Words;
             listBox.DisplayMember = "Content";
         }
 
-        private void updateDataSourceSen(ListBox listBox)
-        {
-            listBox.DataSource = null;
-            listBox.DataSource = sentenceList.Sentences;
-            listBox.DisplayMember = "str";
-        }
 
         private void btnWordColor_Click(object sender, EventArgs e)
         {
@@ -166,73 +158,53 @@ namespace lab2
             }
         }
 
-        private void btnClearListWord_Click(object sender, EventArgs e)
-        {
-            wordList.Words.Clear();
-            updateDataSource(listBoxWords);
-        }
-
-        private void btnUpstreamWords_Click(object sender, EventArgs e)
-        {
-            List<Word> selectedWords = listBoxWords.SelectedItems.Cast<Word>().ToList();
-
-            if (selectedWords.Count > 0)
-            {
-                Sentence sentence = new Sentence(selectedWords);
-
-                foreach (Word selectedWord in selectedWords)
-                {
-                    wordList.Words.Remove(selectedWord);
-                }
-
-                updateDataSource(listBoxWords);
-
-                sentenceList.Sentences.Add(sentence);
-
-                updateDataSourceSen(listBoxSentences);
-            }
-        }
-
-
-
-        private void btnDownstreamWord_Click(object sender, EventArgs e)
-        {
-            if (listBoxSentences.SelectedItems != null)
-            {
-                Sentence selectedSentence = listBoxSentences.SelectedItem as Sentence;
-
-                if (selectedSentence != null)
-                {
-                    wordList.Words.Clear();
-
-                    foreach (Word word in selectedSentence.Content)
-                    {
-                        Word newWord = new Word(word.Content, word.Color, word.WriteDate);
-
-                        wordList.Words.Add(newWord);
-                    }
-
-                    updateDataSource(listBoxWords);
-                }
-            }
-        }
-
         private void listBoxWords_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxWords.SelectedItem != null)
             {
                 Word selectedWord = (Word)listBoxWords.SelectedItem;
-                labelWordLength.Text = $"Длина слова: {selectedWord.GetLength()} символов";
+                labelList.Text = $"Длина слова: {selectedWord.GetLength()} символов";
             }
         }
 
-        private void listBoxSentences_SelectedIndexChanged(object sender, EventArgs e)
+        private void DisplayWord(Word word)
         {
-            if (listBoxSentences.SelectedItem != null)
-            {
-                Sentence selectedSentece = (Sentence)listBoxSentences.SelectedItem;
-                labelSentenceLength.Text = $"Длина предложения: {selectedSentece.GetLength()} слов";
-            }
+            richText.SelectionColor = word.Color;
+            richText.AppendText(word.Content + " ");
+            richText.SelectionColor = richText.ForeColor; // Возвращаем цвет по умолчанию
+        }
+
+
+        private void btnWordsAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSenAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClearWords_Click(object sender, EventArgs e)
+        {
+            wordListBox.Words.Clear();
+            updateDataSource(listBoxWords);
+            labelList.Text = "";
         }
     }
 }

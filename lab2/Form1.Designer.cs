@@ -29,229 +29,281 @@
         private void InitializeComponent()
         {
             btnAddWord = new Button();
-            wordBox = new TextBox();
             label1 = new Label();
-            label2 = new Label();
             btnWordColor = new Button();
-            btnClearListWord = new Button();
-            label3 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            listBoxWords = new ListBox();
-            btnReadWord = new Button();
-            btnWriteWord = new Button();
-            label4 = new Label();
             colorDialogWord = new ColorDialog();
-            label5 = new Label();
-            btnUpstreamWord = new Button();
-            listBoxSentences = new ListBox();
-            btnDownstreamWord = new Button();
-            labelWordLength = new Label();
-            label7 = new Label();
-            labelSentenceLength = new Label();
+            richText = new RichTextBox();
+            btnSenAdd = new Button();
+            label2 = new Label();
+            richSentence = new RichTextBox();
+            label3 = new Label();
+            menuStrip2 = new MenuStrip();
+            файлToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            statToolStripMenuItem = new ToolStripMenuItem();
+            wordBox = new TextBox();
+            listBoxWords = new ListBox();
+            btnWordsAdd = new Button();
+            labelList = new Label();
+            btnClearWords = new Button();
+            btnReadWords = new Button();
+            label4 = new Label();
+            textBoxAuthor = new TextBox();
+            checkBox1 = new CheckBox();
+            btnAuthorSet = new Button();
+            button1 = new Button();
+            menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // btnAddWord
             // 
-            btnAddWord.Location = new Point(350, 77);
+            btnAddWord.Location = new Point(1251, 93);
             btnAddWord.Name = "btnAddWord";
-            btnAddWord.Size = new Size(150, 46);
+            btnAddWord.Size = new Size(152, 50);
             btnAddWord.TabIndex = 9;
             btnAddWord.Text = "Добавить";
             btnAddWord.UseVisualStyleBackColor = true;
             btnAddWord.Click += btnAddWord_Click;
             // 
-            // wordBox
-            // 
-            wordBox.ForeColor = Color.Black;
-            wordBox.Location = new Point(20, 84);
-            wordBox.Name = "wordBox";
-            wordBox.Size = new Size(296, 39);
-            wordBox.TabIndex = 10;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(20, 31);
+            label1.Location = new Point(771, 64);
             label1.Name = "label1";
             label1.Size = new Size(83, 32);
             label1.TabIndex = 11;
             label1.Text = "Слово";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(20, 288);
-            label2.Name = "label2";
-            label2.Size = new Size(81, 32);
-            label2.TabIndex = 12;
-            label2.Text = "Слова";
-            // 
             // btnWordColor
             // 
-            btnWordColor.Location = new Point(350, 140);
+            btnWordColor.Location = new Point(1098, 93);
             btnWordColor.Name = "btnWordColor";
-            btnWordColor.Size = new Size(150, 46);
+            btnWordColor.Size = new Size(134, 50);
             btnWordColor.TabIndex = 17;
             btnWordColor.Text = "Цвет";
             btnWordColor.UseVisualStyleBackColor = true;
             btnWordColor.Click += btnWordColor_Click;
             // 
-            // btnClearListWord
+            // richText
             // 
-            btnClearListWord.Location = new Point(356, 281);
-            btnClearListWord.Name = "btnClearListWord";
-            btnClearListWord.Size = new Size(144, 46);
-            btnClearListWord.TabIndex = 18;
-            btnClearListWord.Text = "Очистить";
-            btnClearListWord.UseVisualStyleBackColor = true;
-            btnClearListWord.Click += btnClearListWord_Click;
+            richText.Location = new Point(27, 100);
+            richText.Name = "richText";
+            richText.Size = new Size(683, 658);
+            richText.TabIndex = 45;
+            richText.Text = "";
+            // 
+            // btnSenAdd
+            // 
+            btnSenAdd.Location = new Point(1251, 570);
+            btnSenAdd.Name = "btnSenAdd";
+            btnSenAdd.Size = new Size(152, 50);
+            btnSenAdd.TabIndex = 46;
+            btnSenAdd.Text = "Добавить";
+            btnSenAdd.UseVisualStyleBackColor = true;
+            btnSenAdd.Click += btnSenAdd_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(771, 501);
+            label2.Name = "label2";
+            label2.Size = new Size(170, 32);
+            label2.TabIndex = 48;
+            label2.Text = "Предложение";
+            // 
+            // richSentence
+            // 
+            richSentence.Location = new Point(771, 546);
+            richSentence.Name = "richSentence";
+            richSentence.Size = new Size(461, 100);
+            richSentence.TabIndex = 50;
+            richSentence.Text = "";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 154);
+            label3.Location = new Point(27, 64);
             label3.Name = "label3";
-            label3.Size = new Size(65, 32);
-            label3.TabIndex = 20;
-            label3.Text = "Дата";
+            label3.Size = new Size(73, 32);
+            label3.TabIndex = 51;
+            label3.Text = "Текст";
             // 
-            // dateTimePicker1
+            // menuStrip2
             // 
-            dateTimePicker1.Location = new Point(20, 212);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(480, 39);
-            dateTimePicker1.TabIndex = 21;
+            menuStrip2.ImageScalingSize = new Size(32, 32);
+            menuStrip2.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, toolsToolStripMenuItem });
+            menuStrip2.Location = new Point(0, 0);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Size = new Size(1457, 40);
+            menuStrip2.TabIndex = 56;
+            menuStrip2.Text = "menuStrip2";
+            // 
+            // файлToolStripMenuItem
+            // 
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem });
+            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            файлToolStripMenuItem.Size = new Size(90, 36);
+            файлToolStripMenuItem.Text = "Файл";
+            // 
+            // openToolStripMenuItem
+            // 
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(263, 44);
+            openToolStripMenuItem.Text = "Открыть";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(263, 44);
+            saveToolStripMenuItem.Text = "Сохранить";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // toolsToolStripMenuItem
+            // 
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { statToolStripMenuItem });
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            toolsToolStripMenuItem.Size = new Size(184, 36);
+            toolsToolStripMenuItem.Text = "Инструменты";
+            // 
+            // statToolStripMenuItem
+            // 
+            statToolStripMenuItem.Name = "statToolStripMenuItem";
+            statToolStripMenuItem.Size = new Size(267, 44);
+            statToolStripMenuItem.Text = "Статистика";
+            statToolStripMenuItem.Click += statToolStripMenuItem_Click;
+            // 
+            // wordBox
+            // 
+            wordBox.ForeColor = Color.Black;
+            wordBox.Location = new Point(771, 99);
+            wordBox.Name = "wordBox";
+            wordBox.Size = new Size(296, 39);
+            wordBox.TabIndex = 10;
             // 
             // listBoxWords
             // 
             listBoxWords.FormattingEnabled = true;
             listBoxWords.ItemHeight = 32;
-            listBoxWords.Location = new Point(20, 339);
+            listBoxWords.Location = new Point(771, 188);
             listBoxWords.Name = "listBoxWords";
-            listBoxWords.Size = new Size(480, 356);
-            listBoxWords.TabIndex = 28;
+            listBoxWords.Size = new Size(296, 228);
+            listBoxWords.TabIndex = 57;
             listBoxWords.SelectedIndexChanged += listBoxWords_SelectedIndexChanged;
             // 
-            // btnReadWord
+            // btnWordsAdd
             // 
-            btnReadWord.Location = new Point(350, 755);
-            btnReadWord.Name = "btnReadWord";
-            btnReadWord.Size = new Size(150, 46);
-            btnReadWord.TabIndex = 35;
-            btnReadWord.Text = "Прочитать";
-            btnReadWord.UseVisualStyleBackColor = true;
-            btnReadWord.Click += btnReadWord_Click;
+            btnWordsAdd.Location = new Point(1080, 356);
+            btnWordsAdd.Name = "btnWordsAdd";
+            btnWordsAdd.Size = new Size(152, 50);
+            btnWordsAdd.TabIndex = 59;
+            btnWordsAdd.Text = "Добавить";
+            btnWordsAdd.UseVisualStyleBackColor = true;
+            btnWordsAdd.Click += btnWordsAdd_Click;
             // 
-            // btnWriteWord
+            // labelList
             // 
-            btnWriteWord.Location = new Point(20, 755);
-            btnWriteWord.Name = "btnWriteWord";
-            btnWriteWord.Size = new Size(144, 46);
-            btnWriteWord.TabIndex = 36;
-            btnWriteWord.Text = "Записать";
-            btnWriteWord.UseVisualStyleBackColor = true;
-            btnWriteWord.Click += writeToFile_Click;
+            labelList.AutoSize = true;
+            labelList.Location = new Point(776, 419);
+            labelList.Name = "labelList";
+            labelList.Size = new Size(0, 32);
+            labelList.TabIndex = 60;
+            // 
+            // btnClearWords
+            // 
+            btnClearWords.Location = new Point(1080, 188);
+            btnClearWords.Name = "btnClearWords";
+            btnClearWords.Size = new Size(152, 50);
+            btnClearWords.TabIndex = 61;
+            btnClearWords.Text = "Очистить";
+            btnClearWords.UseVisualStyleBackColor = true;
+            btnClearWords.Click += btnClearWords_Click;
+            // 
+            // btnReadWords
+            // 
+            btnReadWords.Location = new Point(1080, 244);
+            btnReadWords.Name = "btnReadWords";
+            btnReadWords.Size = new Size(152, 50);
+            btnReadWords.TabIndex = 62;
+            btnReadWords.Text = "Прочитать";
+            btnReadWords.UseVisualStyleBackColor = true;
+            btnReadWords.Click += btnReadWord_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(579, 295);
+            label4.Location = new Point(34, 579);
             label4.Name = "label4";
-            label4.Size = new Size(169, 32);
-            label4.TabIndex = 38;
-            label4.Text = "Предложения";
+            label4.Size = new Size(0, 32);
+            label4.TabIndex = 64;
             // 
-            // label5
+            // textBoxAuthor
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(1111, 31);
-            label5.Name = "label5";
-            label5.Size = new Size(0, 32);
-            label5.TabIndex = 39;
+            textBoxAuthor.Location = new Point(771, 719);
+            textBoxAuthor.Name = "textBoxAuthor";
+            textBoxAuthor.Size = new Size(322, 39);
+            textBoxAuthor.TabIndex = 65;
             // 
-            // btnUpstreamWord
+            // checkBox1
             // 
-            btnUpstreamWord.Location = new Point(506, 445);
-            btnUpstreamWord.Name = "btnUpstreamWord";
-            btnUpstreamWord.Size = new Size(69, 43);
-            btnUpstreamWord.TabIndex = 40;
-            btnUpstreamWord.Text = "->";
-            btnUpstreamWord.UseVisualStyleBackColor = true;
-            btnUpstreamWord.Click += btnUpstreamWords_Click;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(771, 666);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(123, 36);
+            checkBox1.TabIndex = 66;
+            checkBox1.Text = "Автор?";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
-            // listBoxSentences
+            // btnAuthorSet
             // 
-            listBoxSentences.FormattingEnabled = true;
-            listBoxSentences.ItemHeight = 32;
-            listBoxSentences.Location = new Point(581, 339);
-            listBoxSentences.Name = "listBoxSentences";
-            listBoxSentences.Size = new Size(483, 356);
-            listBoxSentences.TabIndex = 41;
-            listBoxSentences.SelectedIndexChanged += listBoxSentences_SelectedIndexChanged;
+            btnAuthorSet.Location = new Point(1114, 713);
+            btnAuthorSet.Name = "btnAuthorSet";
+            btnAuthorSet.Size = new Size(152, 50);
+            btnAuthorSet.TabIndex = 67;
+            btnAuthorSet.Text = "Установить";
+            btnAuthorSet.UseVisualStyleBackColor = true;
             // 
-            // btnDownstreamWord
+            // button1
             // 
-            btnDownstreamWord.Location = new Point(506, 509);
-            btnDownstreamWord.Name = "btnDownstreamWord";
-            btnDownstreamWord.Size = new Size(69, 43);
-            btnDownstreamWord.TabIndex = 42;
-            btnDownstreamWord.Text = "<-";
-            btnDownstreamWord.UseVisualStyleBackColor = true;
-            btnDownstreamWord.Click += btnDownstreamWord_Click;
-            // 
-            // labelWordLength
-            // 
-            labelWordLength.AutoSize = true;
-            labelWordLength.Location = new Point(20, 709);
-            labelWordLength.Name = "labelWordLength";
-            labelWordLength.Size = new Size(166, 32);
-            labelWordLength.TabIndex = 43;
-            labelWordLength.Text = "Длина слова: ";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(665, 869);
-            label7.Name = "label7";
-            label7.Size = new Size(78, 32);
-            label7.TabIndex = 44;
-            label7.Text = "label7";
-            // 
-            // labelSentenceLength
-            // 
-            labelSentenceLength.AutoSize = true;
-            labelSentenceLength.Location = new Point(581, 709);
-            labelSentenceLength.Name = "labelSentenceLength";
-            labelSentenceLength.Size = new Size(255, 32);
-            labelSentenceLength.TabIndex = 46;
-            labelSentenceLength.Text = "Длина предложения: ";
+            button1.Location = new Point(1080, 300);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 50);
+            button1.TabIndex = 68;
+            button1.Text = "Записать";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += writeToFile_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1118, 879);
-            Controls.Add(labelSentenceLength);
-            Controls.Add(label7);
-            Controls.Add(labelWordLength);
-            Controls.Add(btnDownstreamWord);
-            Controls.Add(listBoxSentences);
-            Controls.Add(btnUpstreamWord);
-            Controls.Add(label5);
+            ClientSize = new Size(1457, 784);
+            Controls.Add(button1);
+            Controls.Add(btnAuthorSet);
+            Controls.Add(checkBox1);
+            Controls.Add(textBoxAuthor);
             Controls.Add(label4);
-            Controls.Add(btnWriteWord);
-            Controls.Add(btnReadWord);
+            Controls.Add(btnReadWords);
+            Controls.Add(btnClearWords);
+            Controls.Add(labelList);
+            Controls.Add(btnWordsAdd);
             Controls.Add(listBoxWords);
-            Controls.Add(dateTimePicker1);
             Controls.Add(label3);
-            Controls.Add(btnClearListWord);
+            Controls.Add(richSentence);
+            Controls.Add(btnSenAdd);
+            Controls.Add(label2);
+            Controls.Add(richText);
             Controls.Add(btnWordColor);
             Controls.Add(btnAddWord);
             Controls.Add(wordBox);
             Controls.Add(label1);
-            Controls.Add(label2);
+            Controls.Add(menuStrip2);
             Name = "Form1";
             Text = "Form1";
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -259,26 +311,32 @@
         #endregion
 
         private Button btnAddWord;
-        private TextBox wordBox;
         private Button btnColorWord;
         private Label label1;
         private Button btnClearSentence;
-        private Label label2;
         private Button btnWordColor;
-        private Button btnClearListWord;
-        private Label label3;
-        private DateTimePicker dateTimePicker1;
-        private ListBox listBoxWords;
-        private Button btnReadWord;
-        private Button btnWriteWord;
-        private Label label4;
         private ColorDialog colorDialogWord;
-        private Label label5;
-        private Button btnUpstreamWord;
-        private ListBox listBoxSentences;
-        private Button btnDownstreamWord;
-        private Label labelWordLength;
-        private Label label7;
-        private Label labelSentenceLength;
+        private RichTextBox richText;
+        private Button btnSenAdd;
+        private Label label2;
+        private RichTextBox richSentence;
+        private Label label3;
+        private MenuStrip menuStrip2;
+        private ToolStripMenuItem файлToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ToolStripMenuItem statToolStripMenuItem;
+        private TextBox wordBox;
+        private ListBox listBoxWords;
+        private Button btnWordsAdd;
+        private Label labelList;
+        private Button btnClearWords;
+        private Button btnReadWords;
+        private Label label4;
+        private TextBox textBoxAuthor;
+        private CheckBox checkBox1;
+        private Button btnAuthorSet;
+        private Button button1;
     }
 }
